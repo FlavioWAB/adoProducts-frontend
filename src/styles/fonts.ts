@@ -1,3 +1,3 @@
 export default {
-    bannerSubtitleFont: 'Impact, Charcoal, sans-serif'
+    primary: 'Roboto, Helvetica Neue ,sans-serif'
 }

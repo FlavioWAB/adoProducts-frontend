@@ -13,6 +13,10 @@ export default createGlobalStyle`
     font-family: "Trebuchet MS", Helvetica, sans-serif;
   }
 
+  #app {
+    height: 100%;
+  }
+
   button {
     cursor: pointer;
   }

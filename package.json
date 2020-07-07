@@ -14,9 +14,12 @@
 	"dependencies": {
 		"@types/react-router-dom": "^5.1.5",
 		"@types/styled-components": "^5.1.0",
+		"antd": "^4.4.1",
+		"axios": "^0.19.2",
 		"core-js": "^3.6.5",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-router-dom": "^5.2.0",
 		"regenerator-runtime": "^0.13.5",
 		"styled-components": "^5.1.1"
 	},

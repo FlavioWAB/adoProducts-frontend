@@ -1,12 +1,16 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Home from "./pages/Home";
+import App from './App';
+import 'antd/dist/antd.css';
 
 if (module.hot) {
     module.hot.accept()
 }
 
 ReactDOM.render(
-    <Home />,
-    document.getElementById("app"),
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById('app'),
 );
+
