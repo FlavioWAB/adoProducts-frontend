@@ -3,16 +3,21 @@ import { ISignInCredentials, IUser } from '../models/User';
 
 
 class Api {
-	routes = {
+	private routes = {
 		LOGIN: '/login',
-		USER: '/users'
+		USER: '/users',
+		PRODUCT: '/products',
+		PRODUCT_PAGED: '/products/result-limit/:limit/page/:page',
+		PRODUCT_DELETE: '/products/:id',
+		PRODUCT_SEARCH: '/products/search/query/:query',
+		PRODUCT_SEARCH_PAGED: '/products/search/result-limit/:limit/page/:page/query/:query'
 	}
 
-	api = axios.create({
+	private api = axios.create({
 		baseURL: 'https://adoproducts.herokuapp.com',
 	});
 
-	setToken(token: string):void {
+	setToken(token: string): void {
 		this.api.defaults.headers.authorization = `Bearer ${token}`;
 	}
 
@@ -22,6 +27,20 @@ class Api {
 
 	registerUser(userData: IUser) {
 		return this.api.post(this.routes.USER, userData)
+	}
+
+	searchProducts(query: string = '', limit: number = 10, page: number = 1) {
+		const searchQuery = query === '' ? this.routes.PRODUCT_PAGED : this.routes.PRODUCT_SEARCH_PAGED;
+
+		return this.api.get(searchQuery
+			.replace(':limit', limit.toString())
+			.replace(':page', page.toString())
+			.replace(':query', query));
+	}
+
+	deleteProduct(id: string) {
+		return this.api.delete(this.routes.PRODUCT_DELETE
+			.replace(':id',id));
 	}
 }
 

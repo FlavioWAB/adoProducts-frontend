@@ -12,11 +12,13 @@
 		"build": "webpack --config webpack.production.js"
 	},
 	"dependencies": {
+		"@types/faker": "^4.1.12",
 		"@types/react-router-dom": "^5.1.5",
 		"@types/styled-components": "^5.1.0",
 		"antd": "^4.4.1",
 		"axios": "^0.19.2",
 		"core-js": "^3.6.5",
+		"faker": "^4.1.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-router-dom": "^5.2.0",

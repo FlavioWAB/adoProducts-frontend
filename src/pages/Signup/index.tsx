@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { LoginLogo, } from './styles';
 import PageContentWrapper from '../../components/PageContentWrapper';
 import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
@@ -10,9 +9,10 @@ import api from '../../services/api';
 
 import { useAuth } from '../../hooks/auth';
 
-import { ExternalPageContainer, ExternalPageFormWrapper, ExternalPageFormAlert } from '../../components/ExternalPage';
+import { ExternalPageContainer, ExternalPageFormWrapper, ExternalPageFormAlert, ExternalLogo } from '../../components/ExternalPage';
 import { AlertProps } from 'antd/lib/alert';
 import { HTTPResponseCodes } from '../../models/Constants';
+import { Link } from 'react-router-dom';
 
 const SignUp: React.FC = () => {
     const authentication = useAuth();
@@ -49,26 +49,26 @@ const SignUp: React.FC = () => {
     return (
         <PageContentWrapper>
             <ExternalPageContainer>
-                <LoginLogo src={companyLogo} />
+                <ExternalLogo />
                 <ExternalPageFormWrapper>
                     <Form name="user_signup" onFinish={onFinish} >
                         {signUpAlert && <ExternalPageFormAlert showIcon message={signUpAlertText} type={signUpAlertType} />}
                         <Form.Item name="name" rules={[{ required: true, message: 'Please input your Name!' }]} >
-                            <Input prefix={<UserOutlined />} placeholder="Full name" />
+                            <Input size="large" prefix={<UserOutlined />} placeholder="Full name" />
                         </Form.Item>
 
                         <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Please input your Email!' }]} >
-                            <Input prefix={<MailOutlined />} placeholder="Email" />
+                            <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
                         </Form.Item>
 
                         <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]} >
-                            <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
+                            <Input size="large" prefix={<LockOutlined />} type="password" placeholder="Password" />
                         </Form.Item>
 
                         <Form.Item>
                             <Button block type="primary" loading={signUpLoading} htmlType="submit">
                                 Sign up
-                            </Button>
+                            </Button>Or <Link to="/">login now!</Link>
                         </Form.Item>
                     </Form>
                 </ExternalPageFormWrapper>

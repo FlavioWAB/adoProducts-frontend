@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { LoginLogo, } from './styles';
 import PageContentWrapper from '../../components/PageContentWrapper';
 import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import companyLogo from '../../img/company-logo.png'
 import { useAuth } from '../../hooks/auth';
 import { ISignInCredentials } from '../../models/User';
 import { Link } from 'react-router-dom';
-import { ExternalPageContainer, ExternalPageFormWrapper, ExternalPageFormAlert } from '../../components/ExternalPage';
+import { ExternalPageContainer, ExternalPageFormWrapper, ExternalPageFormAlert, ExternalLogo } from '../../components/ExternalPage';
 import { HTTPResponseCodes } from '../../models/Constants';
 import { AlertProps } from 'antd/lib/alert';
 
@@ -43,18 +41,18 @@ const Login: React.FC = () => {
     return (
         <PageContentWrapper>
             <ExternalPageContainer>
-                <LoginLogo src={companyLogo} />
+                <ExternalLogo />
                 <ExternalPageFormWrapper>
 
                     {signUpAlert && <ExternalPageFormAlert showIcon message={signUpAlertText} type={signUpAlertType} />}
 
                     <Form name="normal_login" onFinish={onFinish} >
                         <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Please input your Email!' }]} >
-                            <Input prefix={<MailOutlined />} placeholder="Email" />
+                            <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
                         </Form.Item>
 
                         <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]} >
-                            <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
+                            <Input size="large" prefix={<LockOutlined />} type="password" placeholder="Password" />
                         </Form.Item>
 
                         <Form.Item>
