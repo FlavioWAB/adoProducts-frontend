@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IProductGrid } from '../../../models/Product';
 import {
 	ProductGridContainer,
@@ -21,18 +21,23 @@ import {
 } from '@ant-design/icons';
 import { Highlighted } from '../../../components/Highlighted';
 import api from '../../../services/api';
+import { useHistory } from 'react-router-dom';
 const { confirm } = Modal;
 
 const ProductGrid: React.FC<IProductGrid> = ({ products, loading, filterString, triggerUpdate }) => {
 
+	const history = useHistory();
+
 	const showDeleteConfirm = (id: string) => {
-		if(loading) return;
+		if (loading) return;
 		confirm({
 			title: 'Do you want to delete this product?',
 			icon: <ExclamationCircleOutlined />,
 			content: 'This action cannot be undone.',
 			onOk() {
-				return api.deleteProduct(id).then(() => triggerUpdate()).catch((e) => console.log(e));
+				return api.deleteProduct(id)
+					.then(() => triggerUpdate())
+					.catch((e) => console.log(e));
 			},
 		});
 	}
@@ -42,7 +47,7 @@ const ProductGrid: React.FC<IProductGrid> = ({ products, loading, filterString, 
 			{products.length !== 0 && products.map(product => <ProductGridCard key={product.id}
 				actions={[
 					<DeleteOutlined onClick={() => showDeleteConfirm(product.id)} key="delete" />,
-					<EditOutlined key="edit" />
+					<EditOutlined onClick={() => { return loading ? '' : history.push(`/products/${product.id}`)}} key="edit" />
 				]}
 			>
 				<Skeleton loading={loading} active>

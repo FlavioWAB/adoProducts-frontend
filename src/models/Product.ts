@@ -18,4 +18,5 @@ export interface IProductForm {
     loading: boolean;
     showFormAlert: boolean;
     onFinish(product: IProduct): void;
+    product?: Partial<IProduct>;
 }

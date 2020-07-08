@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
 	Avatar,
 	Menu,
@@ -35,11 +35,11 @@ const Header: React.FC = () => {
 	return (
 		<HeaderWrapper>
 			<HeaderContainer>
-				<Link to='/home'>
+				<Link to="/home">
 					<picture>
 						<source media="(max-width: 767px)" srcSet={headerLogoMini} />
 						<source media="(min-width: 768px)" srcSet={headerLogo} />
-						<HeaderLogo src={headerLogoMini} alt="Company logo" />
+						<HeaderLogo src={headerLogoMini} alt="adoProduct logo" />
 					</picture>
 				</Link>
 				<HeaderAvatarDropdownWrapper>

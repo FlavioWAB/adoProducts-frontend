@@ -9,12 +9,14 @@ class Api {
 		PRODUCT: '/products',
 		PRODUCT_PAGED: '/products/result-limit/:limit/page/:page',
 		PRODUCT_DELETE: '/products/:id',
+		PRODUCT_GET: '/products/:id',
+		PRODUCT_UPDATE: '/products/:id',
 		PRODUCT_SEARCH: '/products/search/query/:query',
 		PRODUCT_SEARCH_PAGED: '/products/search/result-limit/:limit/page/:page/query/:query'
 	}
 
 	private api = axios.create({
-		baseURL: 'https://adoproducts.herokuapp.com',
+		baseURL: 'http://localhost:3000',
 	});
 
 	setToken(token: string): void {
@@ -45,6 +47,16 @@ class Api {
 
 	registerProduct(productData: IProduct) {
 		return this.api.post(this.routes.PRODUCT, productData)
+	}
+
+	editProduct(id: string, productData: Partial<IProduct>) {
+		return this.api.put(this.routes.PRODUCT_UPDATE
+			.replace(':id',id), productData)
+	}
+
+	getProductData(id: string) {
+		return this.api.get(this.routes.PRODUCT_GET
+			.replace(':id',id));
 	}
 }
 

@@ -1,3 +1,9 @@
 node_modules
 dist/bundle.js
 dist/bundle.js.map
+dist/bundle.js.br
+dist/bundle.js.gz
+dist/company-header-logo-mini.png
+dist/company-header-logo.png
+dist/company-logo.png
+dist/page-background.png

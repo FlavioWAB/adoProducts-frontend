@@ -31,4 +31,4 @@ const ExternalLogoElement = styled.img`
     margin-bottom: 1rem;
 `;
 
-export const ExternalLogo: React.FC = () => <ExternalLogoElement src={companyLogo} />;
+export const ExternalLogo: React.FC = () => <ExternalLogoElement alt="adoProduct logo" src={companyLogo} />;

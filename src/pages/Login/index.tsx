@@ -24,7 +24,7 @@ const Login: React.FC = () => {
         try {
             await authentication.signIn(values);
         } catch (e) {
-            const responseStatus: Number = e.response.status as Number;
+            const responseStatus: Number = e.response?.status as Number || 0;
             setSignUpAlert(true);
 
             if (responseStatus === HTTPResponseCodes.UNAUTHORIZED) {
@@ -34,8 +34,8 @@ const Login: React.FC = () => {
                 setSignUpAlertText('Something went wrong, please try again.');
                 setSignUpAlertType('warning');
             }
+            setLoginLoading(false);
         }
-        setLoginLoading(false);
     };
 
     return (

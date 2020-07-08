@@ -31,7 +31,7 @@ const SignUp: React.FC = () => {
             authentication.setLoggedIn(userRegistrationResponse.data as IAuthData);
         } catch (e) {
 
-            const responseStatus:Number = e.response.status as Number;
+            const responseStatus: Number = e.response?.status as Number || 0;
             setSignUpAlert(true);
 
             if(responseStatus === HTTPResponseCodes.CONFLICT){
@@ -41,8 +41,8 @@ const SignUp: React.FC = () => {
                 setSignUpAlertText('Something went wrong, please try again');
                 setSignUpAlertType('warning');
             }
+            setSignUpLoading(false);
         }
-        setSignUpLoading(false);
     };
 
     return (

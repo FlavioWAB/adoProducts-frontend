@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import faker from 'faker';
 import {
 	Menu,
 } from 'antd';
@@ -26,12 +25,12 @@ const Home: React.FC = () => {
 
 	for (let i = 0; i < 10; i++) {
 		productPlaceholder.push({
-			id: faker.random.uuid(),
-			name: faker.commerce.productName(),
-			description: faker.lorem.paragraph(),
-			category: faker.commerce.department(),
-			price: Number(faker.commerce.price()),
-			avaliableUnits: Number(faker.finance.amount())
+			id: `lorem-${i}`,
+			name: 'Lorem Ipsum',
+			description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quas. Asperiores voluptatem a dolorum, maxime praesentium optio explicabo! Soluta mollitia dolore, praesentium facere dolorum nesciunt? Laudantium dolorem atque voluptatibus similique?',
+			category: 'Lorem Ipsum',
+			price: Number(1),
+			avaliableUnits: Number(1)
 		})
 	}
 	const authentication = useAuth();
@@ -83,7 +82,7 @@ const Home: React.FC = () => {
 			setTotalResults(total);
 		} catch (e) {
 
-			const responseStatus: Number = e.response.status as Number;
+			const responseStatus: Number = e.response?.status as Number || 0;
 
 			if (responseStatus === HTTPResponseCodes.NOT_FOUND) {
 				setFilteredProducts([]);
