@@ -1,38 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import PageContentWrapper from '../../components/PageContentWrapper';
 import faker from 'faker';
 import {
-	Avatar,
 	Menu,
-	Dropdown,
-	Pagination,
 } from 'antd';
 import {
-	UserOutlined,
-	DownOutlined,
 	PlusOutlined
 } from '@ant-design/icons';
 import { useAuth } from '../../hooks/auth';
 import {
-	HomeLayout,
-	HomeHeader,
-	HomeContent,
-	HeaderLogo,
-	HeaderAvatarWraper,
-	HeaderAvatarDropdownWrapper,
-	HomeContainer,
 	HomeNewProductButton,
 	HomeSearch,
 	HomePagination
 } from './styles';
-import { Link } from 'react-router-dom';
-import headerLogo from '../../img/company-header-logo.png'
-import headerLogoMini from '../../img/company-header-logo-mini.png'
 import DefaultContainer from '../../components/DefaultContainer';
 import { IProduct } from '../../models/Product';
 import ProductGrid from './ProductGrid';
 import api from '../../services/api';
 import { HTTPResponseCodes } from '../../models/Constants';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
 
@@ -65,7 +50,7 @@ const Home: React.FC = () => {
 			</Menu.Item>
 		</Menu>
 	);
-	
+
 	// Fires only when the user has stopped typing (not typed for 500ms)
 	const fireSearchTimeout = (query: string) => {
 		setHomeFilterData(query);
@@ -118,51 +103,29 @@ const Home: React.FC = () => {
 	}, [currentPage]);
 
 	return (
-		<PageContentWrapper>
-			<HomeLayout>
-				<HomeHeader>
-					<HomeContainer>
-						<Link to='/home'>
-							<picture>
-								<source media="(max-width: 767px)" srcSet={headerLogoMini} />
-								<source media="(min-width: 768px)" srcSet={headerLogo} />
-								<HeaderLogo src={headerLogoMini} alt="Company logo" />
-							</picture>
-						</Link>
-						<HeaderAvatarDropdownWrapper>
-							<Dropdown overlay={LogoutDropdownContent} trigger={['click']}>
-								<HeaderAvatarWraper>
-									<Avatar icon={<UserOutlined />} /> Hello, {firstName} <DownOutlined />
-								</HeaderAvatarWraper>
-							</Dropdown>
-						</HeaderAvatarDropdownWrapper>
-					</HomeContainer>
-				</HomeHeader>
-				<HomeContent>
-					<DefaultContainer>
-						<HomeNewProductButton
-							size="large"
-							type="primary"
-							block
-							icon={<PlusOutlined />}>
-							New Product
-    					</HomeNewProductButton>
-						<HomeSearch
-							size="large"
-							placeholder="Filter products"
-							onChange={value => fireSearchTimeout(value.target.value)}
-						/>
-						<ProductGrid triggerUpdate={() => reloadProducts()} filterString={homeFilterData} products={filteredProducts} loading={loading} />
-						{filteredProducts.length !== 0 && <HomePagination
-							simple
-							onChange={(page) => setCurrentPage(page)}
-							current={currentPage}
-							pageSize={RESULTS_LIMIT}
-							total={totalResults} />}
-					</DefaultContainer>
-				</HomeContent>
-			</HomeLayout>
-		</PageContentWrapper>
+		<DefaultContainer>
+			<Link to="/products">
+				<HomeNewProductButton
+					size="large"
+					type="primary"
+					block
+					icon={<PlusOutlined />}>
+					New Product
+					</HomeNewProductButton>
+			</Link>
+			<HomeSearch
+				size="large"
+				placeholder="Filter products"
+				onChange={value => fireSearchTimeout(value.target.value)}
+			/>
+			<ProductGrid triggerUpdate={() => reloadProducts()} filterString={homeFilterData} products={filteredProducts} loading={loading} />
+			{filteredProducts.length !== 0 && <HomePagination
+				simple
+				onChange={(page) => setCurrentPage(page)}
+				current={currentPage}
+				pageSize={RESULTS_LIMIT}
+				total={totalResults} />}
+		</DefaultContainer>
 	);
 };
 

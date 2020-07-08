@@ -1,7 +1,3 @@
-interface IProductFilter {
-
-}
-
 export interface IProduct {
     id: string;
     name: string;
@@ -16,4 +12,10 @@ export interface IProductGrid {
     loading: boolean;
     filterString: string;
     triggerUpdate(): void;
+}
+
+export interface IProductForm {
+    loading: boolean;
+    showFormAlert: boolean;
+    onFinish(product: IProduct): void;
 }

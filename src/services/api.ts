@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ISignInCredentials, IUser } from '../models/User';
-
+import { IProduct } from '../models/Product';
 
 class Api {
 	private routes = {
@@ -41,6 +41,10 @@ class Api {
 	deleteProduct(id: string) {
 		return this.api.delete(this.routes.PRODUCT_DELETE
 			.replace(':id',id));
+	}
+
+	registerProduct(productData: IProduct) {
+		return this.api.post(this.routes.PRODUCT, productData)
 	}
 }
 

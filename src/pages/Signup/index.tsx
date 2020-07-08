@@ -28,7 +28,6 @@ const SignUp: React.FC = () => {
         
         try{
             const userRegistrationResponse = await api.registerUser(userData);
-            console.log(userRegistrationResponse);
             authentication.setLoggedIn(userRegistrationResponse.data as IAuthData);
         } catch (e) {
 

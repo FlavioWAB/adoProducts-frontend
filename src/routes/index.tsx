@@ -6,12 +6,15 @@ import SignUp from '../pages/Signup';
 import Home from '../pages/Home';
 
 import Route from './route';
+import Internal from '../pages/Internal';
 
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Login} />
     <Route path="/signup" exact component={SignUp} />
-    <Route path="/home" internal exact component={Home} />
+    <Route path="/home" internal exact component={Internal} />
+    <Route path="/products" internal exact component={Internal} />
+    <Route path="/products/:id" internal exact component={Internal} />
   </Switch>
 );
 
