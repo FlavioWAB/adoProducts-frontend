@@ -15,7 +15,7 @@ const Route: React.FC<IRoute> = ({
 
 	return (
 		<ReactDOMRoute {...rest}
-			render={({ location }) => {
+			render={() => {
 				return internal === !!user ? (<Component />) : (<Redirect to={{ pathname: internal ? '/' : '/home' }} />);
 			}}
 		/>

@@ -2,42 +2,48 @@ import React, { useState } from 'react';
 import { LoginLogo, } from './styles';
 import PageContentWrapper from '../../components/PageContentWrapper';
 import { Form, Input, Button } from 'antd';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import companyLogo from '../../img/company-logo.png'
+import { IUser, IAuthData } from '../../models/User';
+
+import api from '../../services/api';
+
 import { useAuth } from '../../hooks/auth';
-import { ISignInCredentials } from '../../models/User';
-import { Link } from 'react-router-dom';
+
 import { ExternalPageContainer, ExternalPageFormWrapper, ExternalPageFormAlert } from '../../components/ExternalPage';
-import { HTTPResponseCodes } from '../../models/Constants';
 import { AlertProps } from 'antd/lib/alert';
+import { HTTPResponseCodes } from '../../models/Constants';
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
+    const authentication = useAuth();
 
-    const [loginLoading, setLoginLoading] = useState<boolean>(false);
+    const [signUpLoading, setSignUpLoading] = useState<boolean>(false);
     const [signUpAlert, setSignUpAlert] = useState<boolean>(false);
     const [signUpAlertText, setSignUpAlertText] = useState<String>('');
     const [signUpAlertType, setSignUpAlertType] = useState<AlertProps["type"]>('warning');
 
-    const authentication = useAuth();
-
-    const onFinish = async (values: ISignInCredentials) => {
-        setLoginLoading(true);
+    const onFinish = async (userData: IUser) => {
+        setSignUpLoading(true);
         setSignUpAlert(false);
-        try {
-            await authentication.signIn(values);
+        
+        try{
+            const userRegistrationResponse = await api.registerUser(userData);
+            console.log(userRegistrationResponse);
+            authentication.setLoggedIn(userRegistrationResponse.data as IAuthData);
         } catch (e) {
-            const responseStatus: Number = e.response.status as Number;
+
+            const responseStatus:Number = e.response.status as Number;
             setSignUpAlert(true);
 
-            if (responseStatus === HTTPResponseCodes.UNAUTHORIZED) {
-                setSignUpAlertText('E-mail and password do not match.');
+            if(responseStatus === HTTPResponseCodes.CONFLICT){
+                setSignUpAlertText('This e-mail is already registered');
                 setSignUpAlertType('error');
             } else {
-                setSignUpAlertText('Something went wrong, please try again.');
+                setSignUpAlertText('Something went wrong, please try again');
                 setSignUpAlertType('warning');
             }
         }
-        setLoginLoading(false);
+        setSignUpLoading(false);
     };
 
     return (
@@ -45,10 +51,12 @@ const Login: React.FC = () => {
             <ExternalPageContainer>
                 <LoginLogo src={companyLogo} />
                 <ExternalPageFormWrapper>
+                    <Form name="user_signup" onFinish={onFinish} >
+                        {signUpAlert && <ExternalPageFormAlert showIcon message={signUpAlertText} type={signUpAlertType} />}
+                        <Form.Item name="name" rules={[{ required: true, message: 'Please input your Name!' }]} >
+                            <Input prefix={<UserOutlined />} placeholder="Full name" />
+                        </Form.Item>
 
-                    {signUpAlert && <ExternalPageFormAlert showIcon message={signUpAlertText} type={signUpAlertType} />}
-
-                    <Form name="normal_login" onFinish={onFinish} >
                         <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Please input your Email!' }]} >
                             <Input prefix={<MailOutlined />} placeholder="Email" />
                         </Form.Item>
@@ -58,9 +66,9 @@ const Login: React.FC = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <Button block type="primary" loading={loginLoading} htmlType="submit">
-                                Log in
-                            </Button>Or <Link to="/signup">register now!</Link>
+                            <Button block type="primary" loading={signUpLoading} htmlType="submit">
+                                Sign up
+                            </Button>
                         </Form.Item>
                     </Form>
                 </ExternalPageFormWrapper>
@@ -69,4 +77,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default SignUp;

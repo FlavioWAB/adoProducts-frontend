@@ -1,8 +1,9 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
-module.exports = merge(common,{
+module.exports = merge(common, {
     mode: 'development',
+    output: { publicPath: '/' },
     watch: true,
     entry: "./src/index.tsx",
     devtool: "source-map",
@@ -11,6 +12,7 @@ module.exports = merge(common,{
         contentBase: './dist',
         liveReload: false,
         inline: true,
+        historyApiFallback: true,
         hot: true
     }
 })

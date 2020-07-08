@@ -19,4 +19,5 @@ export interface AuthContextData {
 	token: string;
 	signIn(credentials: ISignInCredentials): Promise<void>;
 	signOut(): void;
+	setLoggedIn(authData: IAuthData): void;
 }

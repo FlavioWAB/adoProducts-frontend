@@ -19,11 +19,20 @@ const AuthProvider: React.FC = ({ children }) => {
         return {} as IAuthData;
     });
 
+    const setLoggedIn = useCallback((authData: IAuthData) => {
+
+        localStorage.setItem('adoProducts::token', authData.token);
+        localStorage.setItem('adoProducts::user', JSON.stringify(authData.user));
+
+        api.setToken(authData.token);
+
+        setAuthData(authData);
+    }, []);
+
     const signIn = useCallback(async ({ email, password }) => {
         const credentials: ISignInCredentials = { email, password };
 
         const response = await api.login(credentials);
-
         const authData: IAuthData = response.data;
 
         localStorage.setItem('adoProducts::token', authData.token);
@@ -46,7 +55,8 @@ const AuthProvider: React.FC = ({ children }) => {
             user: authData.user,
             token: authData.token,
             signIn,
-            signOut
+            signOut,
+            setLoggedIn
         }} >
             {children}
         </AuthContext.Provider>

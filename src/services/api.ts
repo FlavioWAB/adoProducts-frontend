@@ -1,8 +1,13 @@
 import axios from 'axios';
-import { ISignInCredentials } from '../models/User';
+import { ISignInCredentials, IUser } from '../models/User';
 
 
 class Api {
+	routes = {
+		LOGIN: '/login',
+		USER: '/users'
+	}
+
 	api = axios.create({
 		baseURL: 'https://adoproducts.herokuapp.com',
 	});
@@ -12,7 +17,11 @@ class Api {
 	}
 
 	login(loginCredentials: ISignInCredentials) {
-		return this.api.post('/login', loginCredentials)
+		return this.api.post(this.routes.LOGIN, loginCredentials)
+	}
+
+	registerUser(userData: IUser) {
+		return this.api.post(this.routes.USER, userData)
 	}
 }
 
