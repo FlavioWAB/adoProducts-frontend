@@ -47,17 +47,21 @@ const ProductGrid: React.FC<IProductGrid> = ({ products, loading, filterString, 
 			{products.length !== 0 && products.map(product => <ProductGridCard key={product.id}
 				actions={[
 					<DeleteOutlined onClick={() => showDeleteConfirm(product.id)} key="delete" />,
-					<EditOutlined onClick={() => { return loading ? '' : history.push(`/products/${product.id}`)}} key="edit" />
+					<EditOutlined onClick={() => { return loading ? '' : history.push(`/products/${product.id}`) }} key="edit" />
 				]}
 			>
 				<Skeleton loading={loading} active>
-					<Meta
-						title={<Highlighted highlight={filterString} text={product.name} />}
-						description={<Highlighted highlight={filterString} text={product.description} />}
-					/>
-					<ProductCategory>Category: <Highlighted highlight={filterString} text={product.category} /></ProductCategory>
-					<ProductPrice>$ {product.price.toFixed(2)}</ProductPrice>
-					<ProductStock>{product.avaliableUnits} units avaliable</ProductStock>
+					<div>
+						<Meta
+							title={<Highlighted highlight={filterString} text={product.name} />}
+							description={<Highlighted highlight={filterString} text={product.description} />}
+						/>
+						<ProductCategory>Category: <Highlighted highlight={filterString} text={product.category} /></ProductCategory>
+					</div>
+					<div>
+						<ProductPrice>$ {product.price.toFixed(2)}</ProductPrice>
+						<ProductStock>{product.avaliableUnits} units avaliable</ProductStock>
+					</div>
 				</Skeleton>
 			</ProductGridCard>)}
 			<ProductGridNotFound>

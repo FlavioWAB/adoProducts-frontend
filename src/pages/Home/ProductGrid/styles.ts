@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Card } from 'antd';
+import colors from '../../../styles/colors';
 
 export const ProductGridContainer = styled.div`
     display: grid;
@@ -16,12 +17,24 @@ export const ProductGridContainer = styled.div`
 
 export const ProductGridCard = styled(Card)`
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    .ant-card-body{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &::after,
+        &::before{
+            display: none;
+        }
+    }
 `;
 
 export const ProductGridNotFound = styled.div`
     display: none;
     flex-direction: column;  
-    color: #c1c1c1;
+    color: ${colors.productNotFound};
     text-align: center;
     font-size: 1.4rem;
     grid-column: 1 / span 2;

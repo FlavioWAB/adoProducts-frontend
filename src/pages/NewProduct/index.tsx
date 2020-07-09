@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import PageContentWrapper from '../../components/PageContentWrapper';
 import {
-    NewProductContent,
-    NewProductContainer,
-    NewProductHeader,
-    NewProductSubtitle
-} from './styles';
+    DefaultFormContainer,
+    DefaultFormHeader,
+    DefaultFormSubtitle
+} from '../../components/DefaultForm/styles';
 import ProductForm from '../../components/ProductForm';
 import { IProduct } from '../../models/Product';
 import api from '../../services/api';
@@ -31,11 +29,11 @@ const NewProduct: React.FC = () => {
     }
 
     return (
-        <NewProductContainer>
-            <NewProductHeader>New Product</NewProductHeader>
-            <NewProductSubtitle>Fields with the <span>*</span> can't be empty</NewProductSubtitle>
+        <DefaultFormContainer>
+            <DefaultFormHeader>New Product</DefaultFormHeader>
+            <DefaultFormSubtitle>Fields with the <span>*</span> can't be empty</DefaultFormSubtitle>
             <ProductForm loading={loading} showFormAlert={showFormAlert} onFinish={(product) => saveProduct(product)}/>
-        </NewProductContainer>
+        </DefaultFormContainer>
     )
 }
 

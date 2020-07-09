@@ -16,7 +16,7 @@ class Api {
 	}
 
 	private api = axios.create({
-		baseURL: 'http://localhost:3000',
+		baseURL: 'https://adoproducts.herokuapp.com',
 	});
 
 	setToken(token: string): void {

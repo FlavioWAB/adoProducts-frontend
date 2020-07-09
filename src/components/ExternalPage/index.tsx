@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Alert } from 'antd';
 import companyLogo from '../../img/company-logo.png';
 import React from 'react';
+import colors from '../../styles/colors';
 
 export const ExternalPageContainer = styled.div`
     max-width: 400px;
@@ -17,7 +18,7 @@ export const ExternalPageContainer = styled.div`
 export const ExternalPageFormWrapper = styled.div`
     margin: 0 -1rem;
     padding: 1rem;
-    background-color: white;
+    background-color: ${colors.externalFormBackground};
     border: 1px solid #d9d9d9;
     border-radius: 6px;
 `
