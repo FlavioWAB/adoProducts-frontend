@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 const Home: React.FC = () => {
 
 	const RESULTS_LIMIT = 10;
-	let productPlaceholder: IProduct[] = [];
+	const productPlaceholder: IProduct[] = [];
 
 	for (let i = 0; i < 10; i++) {
 		productPlaceholder.push({
@@ -29,26 +29,17 @@ const Home: React.FC = () => {
 			name: 'Lorem Ipsum',
 			description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quas. Asperiores voluptatem a dolorum, maxime praesentium optio explicabo! Soluta mollitia dolore, praesentium facere dolorum nesciunt? Laudantium dolorem atque voluptatibus similique?',
 			category: 'Lorem Ipsum',
-			price: Number(1),
-			avaliableUnits: Number(1)
-		})
+			price: 1,
+			avaliableUnits: 1
+		});
 	}
 	const authentication = useAuth();
-	const firstName = authentication.user.name.split(' ')[0];
 	const [homeFilterData, setHomeFilterData] = useState<string>('');
 	const [searchTimeout, setSearchTimeout] = useState<number>(0);
 	const [filteredProducts, setFilteredProducts] = useState<IProduct[]>(productPlaceholder);
 	const [totalResults, setTotalResults] = useState<number>(10);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [loading, setLoading] = useState<boolean>(true);
-
-	const LogoutDropdownContent = (
-		<Menu>
-			<Menu.Item onClick={() => authentication.signOut()} key="0">
-				Logout
-			</Menu.Item>
-		</Menu>
-	);
 
 	// Fires only when the user has stopped typing (not typed for 500ms)
 	const fireSearchTimeout = (query: string) => {

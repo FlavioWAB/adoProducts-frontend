@@ -48,11 +48,11 @@ const Login: React.FC = () => {
 
                     <Form name="normal_login" onFinish={onFinish} >
                         <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Please input your Email!' }]} >
-                            <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
+                            <Input aria-label="Email" size="large" prefix={<MailOutlined />} placeholder="Email" />
                         </Form.Item>
 
                         <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]} >
-                            <Input size="large" prefix={<LockOutlined />} type="password" placeholder="Password" />
+                            <Input aria-label="Password" size="large" prefix={<LockOutlined />} type="password" placeholder="Password" />
                         </Form.Item>
 
                         <Form.Item>

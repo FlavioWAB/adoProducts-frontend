@@ -29,6 +29,11 @@ export const ProductGridCard = styled(Card)`
             display: none;
         }
     }
+    .anticon.anticon-delete{
+        &:hover{
+            color: ${colors.deleteAction} !important;
+        }
+    }
 `;
 
 export const ProductGridNotFound = styled.div`

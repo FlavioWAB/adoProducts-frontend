@@ -52,15 +52,15 @@ const SignUp: React.FC = () => {
                 <ExternalPageFormWrapper>
                     <Form name="user_signup" onFinish={onFinish} >
                         {signUpAlert && <ExternalPageFormAlert showIcon message={signUpAlertText} type={signUpAlertType} />}
-                        <Form.Item name="name" rules={[{ required: true, message: 'Please input your Name!' }]} >
+                        <Form.Item label="Full name" name="name" rules={[{ required: true, message: 'Please input your Name!' }]} >
                             <Input size="large" prefix={<UserOutlined />} placeholder="Full name" />
                         </Form.Item>
 
-                        <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Please input your Email!' }]} >
+                        <Form.Item label="Email" name="email" rules={[{ required: true, type: 'email', message: 'Please input your Email!' }]} >
                             <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
                         </Form.Item>
 
-                        <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]} >
+                        <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please input your Password!' }]} >
                             <Input size="large" prefix={<LockOutlined />} type="password" placeholder="Password" />
                         </Form.Item>
 

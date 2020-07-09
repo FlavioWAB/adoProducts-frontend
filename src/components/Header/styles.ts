@@ -22,6 +22,7 @@ export const HeaderContainer = styled(DefaultContainer)`
 export const HeaderLogo = styled.img`
     height: 100%;
     padding: 0.7rem;
+    padding-left: 0;
 `;
 
 export const HeaderAvatarWraper = styled.div``;

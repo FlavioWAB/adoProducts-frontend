@@ -21,6 +21,9 @@ export const ExternalPageFormWrapper = styled.div`
     background-color: ${colors.externalFormBackground};
     border: 1px solid #d9d9d9;
     border-radius: 6px;
+    label {
+        display: none;
+    }
 `
 
 export const ExternalPageFormAlert = styled(Alert)`
